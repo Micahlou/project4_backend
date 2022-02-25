@@ -1,0 +1,1 @@
+web: gunicorn dataProvider.wsgi --log-file -
