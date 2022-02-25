@@ -1,8 +1,16 @@
 from email.mime import image
 from unittest.util import _MAX_LENGTH
 from django.db import models
-
+import os
+import datetime
 # Create your models here.
+
+
+def filepath(reqeusts, filename):
+    filename_original = filename
+    nowTime = datetime.datetime.now().strftime('%Y%m%d%H:%M:%S')
+    filename = "%s%s" % (nowTime, filename_original)
+    return os.path.join('comicThumbnails/', filename)
 
 
 class Comic(models.Model):
@@ -15,3 +23,4 @@ class Comic(models.Model):
     variantIssued = models.IntegerField()
     totalIssued = models.IntegerField()
     totalListed = models.IntegerField()
+    image = models.ImageField(upload_to=filepath, null=True, blank=True)
