@@ -23,4 +23,3 @@ class Comic(models.Model):
     variantIssued = models.IntegerField()
     totalIssued = models.IntegerField()
     totalListed = models.IntegerField()
-    image = models.ImageField(upload_to=filepath, null=True, blank=True)
