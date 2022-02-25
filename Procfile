@@ -1,1 +1,1 @@
-web: gunicorn dataProvider.wsgi --log-file -
+web: gunicorn vva-backend.wsgi --log-file -
