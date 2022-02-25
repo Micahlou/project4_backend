@@ -17,3 +17,22 @@ def addComic(request):
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
+
+
+@api_view(['PUT'])
+def comicUpdate(request, pk):
+    comic = Comic.objects.get(id=pk)
+    serializer = ComicSerializer(instance=comic, data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+
+@api_view(['DELETE'])
+def comicDelete(request, pk):
+    comic = Comic.objects.get(id=pk)
+    comic.delete()
+
+    return Response('Item succsesfully deleted!')
