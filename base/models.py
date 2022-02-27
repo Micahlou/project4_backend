@@ -15,7 +15,7 @@ def filepath(reqeusts, filename):
 
 class Comic(models.Model):
     name = models.CharField(max_length=250)
-    image = models.URLField("https://i.imgur.com/ShzwUoR.png")
+    image = models.URLField()
     rarity = models.CharField(max_length=100)
     price = models.IntegerField()
     priceChange = models.IntegerField()
