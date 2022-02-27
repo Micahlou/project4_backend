@@ -1,1 +1,1 @@
-web: python manage.py runserver 0.0.0.0:8003
+web: gunicorn dataProvider.wsgi --log-file -
