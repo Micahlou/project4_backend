@@ -28,3 +28,4 @@ class Comic(models.Model):
 class UserCollection(models.Model):
     userid = models.CharField(max_length=100, primary_key=True)
     comicCollection = models.ManyToManyField(Comic, blank=True)
+    name = models.CharField(max_length=100, default="defaultName")

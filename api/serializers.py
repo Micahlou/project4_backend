@@ -17,4 +17,4 @@ class CollectionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserCollection
-        fields = ['userid', 'comicCollection']
+        fields = ['userid', 'comicCollection', 'name']
