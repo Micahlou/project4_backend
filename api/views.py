@@ -1,10 +1,12 @@
-from django.shortcuts import render
-from django.http import JsonResponse
-
+from gc import collect
+from pickle import GET
+from typing import Collection
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from base.models import Comic
-from .serializers import ComicSerializer
+from base.models import UserCollection
+from .serializers import CollectionSerializer, ComicSerializer
+from rest_framework import generics
 
 
 @api_view(['GET'])
@@ -14,7 +16,6 @@ def apiOverview(request):
         'Detail': '/comic-detail/',
         'Create': '/comic-create/',
         'Update': '/comic-update/<str:pk>/',
-        'Delete': '/comic-delete/<str:pk>/'
     }
 
 
@@ -57,3 +58,43 @@ def comicDelete(request, pk):
     comic.delete()
 
     return Response('Item succsesfully deleted!')
+
+
+@api_view(['GET'])
+def getCollection(request, pk):
+    collection = UserCollection.objects.get(id=pk)
+    serializer = CollectionSerializer(instance=collection)
+    print(serializer)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def collectionCreate(request):
+    serializer = CollectionSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+
+class CollectionCreate(generics.CreateAPIView):
+    # API endpoint that allows creation of a new customer
+    queryset = UserCollection.objects.all(),
+    serializer_class = CollectionSerializer
+
+
+class CollectionList(generics.RetrieveAPIView):
+    # API endpoint that allows customer to be viewed.
+    queryset = UserCollection.objects.all()
+    serializer_class = CollectionSerializer
+
+
+class CollectionUpdate(generics.RetrieveUpdateAPIView):
+    # API endpoint that allows a customer record to be updated.
+    queryset = UserCollection.objects.all()
+    serializer_class = CollectionSerializer
+
+
+class CollectionDelete(generics.RetrieveDestroyAPIView):
+    # API endpoint that allows a customer record to be deleted.
+    queryset = UserCollection.objects.all()
+    serializer_class = CollectionSerializer

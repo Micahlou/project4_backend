@@ -10,6 +10,18 @@ urlpatterns = [
     path('comic-create/', views.addComic),
     path('comic-update/<str:pk>/', views.comicUpdate, name="comic-update"),
     path('comic-delete/<str:pk>/', views.comicDelete, name="comic-delete"),
+    # path('collection-list/str:<pk>/', views.getCollection, name="collection-list"),
+    path('collection/create/', views.CollectionCreate.as_view(),
+         name="collection-create"),
+
+    path('collection/list/<str:pk>/',
+         views.CollectionList.as_view(), name='collectionList'),
+    path('collection/update/<str:pk>/',
+         views.CollectionUpdate.as_view(), name='collectionUpdate'),
+    path('collection/delete/<str:pk>/',
+         views.CollectionDelete.as_view(), name='collectionDelete')
+
+
 
 ]
 

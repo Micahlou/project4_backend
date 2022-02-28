@@ -23,3 +23,8 @@ class Comic(models.Model):
     variantIssued = models.IntegerField()
     totalIssued = models.IntegerField()
     totalListed = models.IntegerField()
+
+
+class UserCollection(models.Model):
+    userid = models.CharField(max_length=100, primary_key=True)
+    comicCollection = models.ManyToManyField(Comic, blank=True)
